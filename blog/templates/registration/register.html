@@ -1,0 +1,55 @@
+{% load static %}
+
+
+<html>
+    <head>
+        <title>FRONT_END FORUM</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,900;1,400&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+    </head>
+    <body>
+      <div class="page-header">
+            <h1><a href="/">FRONT-END:forum</a></h1>
+            <p class="text">Treść forum dostępna po zalogownaiu się!</p>
+            {% if not user.is_authenticated %}
+            <a class="btn btn-default" href="{% url 'post_list' %}" class="top-menu"><span >STRONA GŁÓWNA</span></a>
+            <a class="btn btn-default" href="{% url 'login' %}" class="top-menu"><span> ZALOGUJ SIĘ! </span></a>
+            {% endif %}
+            {% if user.is_authenticated %}
+            <a class="btn btn-default" href="{% url 'post_list' %}" class="top-menu"><span> STRONA GŁÓWNA </span></a>
+            <a class="btn btn-default" href="{% url 'post_new' %}" class="top-menu" ><span>UTRÓRZ WPIS</span></a>
+            {% endif %}
+            {% if user.is_authenticated %}
+            <p class="text">Cześć {{ user.username }} !</p>
+            <p><a class="btn btn-default" href="{% url 'logout' %}" class="top-menu">WYLOGUJ SIĘ!</a></p>
+            {% endif %}
+        </div>
+        {% if not user.is_authenticated %}
+        <section>
+          <h1> DOŁĄCZ DO NAS! </h1>
+
+        <div class="design-w3l">
+          <div class="mail-form-agile">
+            <form action="{% url 'register' %}" method="post">
+                    {% csrf_token %}
+                    {{ form.username }}
+            <div class="main">
+                <div class="form-left-to-w3l">
+                    {{ form.password1 }}
+                <div class="clear"></div>
+            </div>
+            <div class="form-right-w3ls ">
+                {{ form.password2 }}
+            </div>
+          </div>
+          <br>
+          <input class="btn btn-default" type="submit" value="DOŁĄCZ!">
+        </form>
+    </div>
+    </div>
+    </section>
+    {% endif %}
+    </body>
+</html>

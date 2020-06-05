@@ -1,0 +1,28 @@
+{% load static %}
+<html>
+    <head>
+        <title>FRONT_END FORUM</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,900;1,400&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+    </head>
+    <body>
+        <div class="page-header">
+            
+
+            <h1><a href="/">FORUM front-end</a></h1>
+            <a class="btn btn-default" href="{% url 'post_list' %}" class="top-menu"><span >Strona główna</span></a>
+            
+        </div>        
+    <section>  
+	<h2>Zaloguj się!</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+         <button type="submit" class="btn btn-default">Loguj</button>
+        </form> 
+        
+    </section>  
+    </body>
+</html>
